@@ -1,0 +1,38 @@
+<html>
+   <head>
+      <meta charset="UTF-8"/>
+      <title>Caça Palavras</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.5.1/sweetalert2.min.css" integrity="sha512-y6TjkITSFkRB9mZmDaJyDOsyHsYvOo3Np3iAKe02HgMDP4L4vbmbhlzNpbbIVC1x+GUUHvepTd1BKDe4kC6kNg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <link rel="stylesheet" href="css/jogo.css">
+   </head>
+   <body>
+      <div id="configs">
+         <label >Dificuldade: </label>
+         <select name="select_dificuldade" id="select_dificuldade">
+            <option value="facil">Fácil</option>
+            <option value="medio">Médio</option>
+            <option value="dificil" selected>Difícil</option>
+         </select>
+         <br>
+         <label >Quantidade de palavras: </label>
+         <select name="select_quantidade" id="select_quantidade">
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8" >8</option>
+            <option value="9">9</option>
+            <option value="1" selected>1</option>
+         </select>
+         <br>
+         <button id="iniciar">Iniciar</button>
+      </div>
+      <div id="base_jogo" style="display: none;" class="base_jogo">
+         <div id="jogo" width="50%"></div>
+         <div id="lista_palavras"></div>
+      </div>
+
+      <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.5.1/sweetalert2.min.js" integrity="sha512-MV9Mmx+DfPYZTCXTkQhNUq2EWuAUU/fAm/HPYdEekvJr1W0Ko7RgdwFpOVG/vZXyQRKI+Ojxp/Un8xAe61oaiA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="js/jogo.class.js"></script>
+      <script src="js/jogo.js"></script>
+   </body>
+</html>

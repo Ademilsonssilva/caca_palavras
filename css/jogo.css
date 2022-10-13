@@ -1,0 +1,60 @@
+.grid {
+   border: 1px solid black;
+   border-collapse: collapse;
+
+   /* Bloquear seleção default do texto */
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -o-user-select: none;
+   user-select: none;
+}
+
+.celula {
+   padding: 10px;
+   border: 1px solid black;
+   border-collapse: collapse;
+   
+}
+
+.selecao_temporaria {
+   background-color: aquamarine;
+}
+
+.selecao_correta {
+   background-color: greenyellow;
+}
+
+.base_jogo{
+   display: flex;
+   flex-direction: row;
+}
+
+#lista_palavras {
+   margin-left: 10px;
+   padding-left: 20px;
+}
+
+@media print {
+   .grid {
+      width: 100%;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+   }
+
+   .base_jogo{
+      display: inline !important;
+   }
+
+   .div_palavras_restantes {
+      display: none !important;
+   }
+
+   button {
+      display: none !important;
+   }
+
+   #lista_palavras > li {
+      text-decoration: none !important;
+   }
+}
