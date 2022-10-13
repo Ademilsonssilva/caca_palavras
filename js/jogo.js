@@ -16,7 +16,7 @@ button.onclick = function () {
 
    let jogo = new Jogo(quantidade_horizontal, quantidade_vertical, quantidade_palavras, dificuldade)
 
-   jogo.debug = true
+   jogo.debug = false
 
    jogo.iniciarJogo()
 
