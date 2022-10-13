@@ -13,8 +13,9 @@ button.onclick = function () {
    let quantidade_vertical = 23
    let quantidade_palavras = parseInt(document.getElementById('select_quantidade').value)
    let dificuldade = document.getElementById('select_dificuldade').value
+   let tipo_desafio = document.getElementById('select_tipo_desafio').value
 
-   let jogo = new Jogo(quantidade_horizontal, quantidade_vertical, quantidade_palavras, dificuldade)
+   let jogo = new Jogo(quantidade_horizontal, quantidade_vertical, quantidade_palavras, dificuldade, tipo_desafio)
 
    jogo.debug = false
 

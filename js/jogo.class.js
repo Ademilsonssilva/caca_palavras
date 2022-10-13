@@ -5,6 +5,7 @@ class Jogo
    tamanho_vertical = 0
    quantidade_palavras = 0;
    dificuldade = 'medio' // facil, medio ou dificil
+   tipo_desafio = 'aleatorio' // Forma que será buscada a informação
 
    mouse_pressionado = false // usado para controlar se o usuário está arrastando o mouse pressionado
 
@@ -22,12 +23,13 @@ class Jogo
    grid = null
 
    // Inicia informando as dimensões do grid do jogo
-   constructor (tamanho_horizontal, tamanho_vertical, quantidade_palavras, dificuldade)
+   constructor (tamanho_horizontal, tamanho_vertical, quantidade_palavras, dificuldade, tipo_desafio)
    {
       this.tamanho_horizontal = tamanho_horizontal
       this.tamanho_vertical = tamanho_vertical
       this.quantidade_palavras = quantidade_palavras
       this.dificuldade = dificuldade
+      this.tipo_desafio = tipo_desafio
 
       //preenche uma matriz com todas as posições possíveis, todas com null
       for( let linha = 1; linha <= this.tamanho_vertical; linha++ ) {
@@ -425,10 +427,40 @@ class Jogo
 
       let jogo = this
 
-      fetch('https://api.dicionario-aberto.net/random').then((response) => response.json()).then((json) => {
+      if (this.tipo_desafio == 'aleatorio') {
+         fetch('https://api.dicionario-aberto.net/random').then((response) => response.json()).then((json) => {
             
-         if (json.word.length <= jogo.tamanho_horizontal && json.word.length <= jogo.tamanho_vertical && json.word.length > 3 ) {
-            jogo.palavras_jogo.push(json.word.toUpperCase())
+            if (json.word.length <= jogo.tamanho_horizontal && json.word.length <= jogo.tamanho_vertical && json.word.length > 3 ) {
+               jogo.palavras_jogo.push(json.word.toUpperCase())
+
+               if (jogo.palavras_jogo.length == this.quantidade_palavras) {
+                  jogo.finalizou_buscar_palavras = true
+               }
+            }
+            else {
+               if (jogo.debug) {
+                  console.log(`Palavra ${json.word} muito grande`)
+               }
+               jogo.buscarPalavra()
+            }
+
+         })
+      }
+      else if (this.tipo_desafio == 'animais' || this.tipo_desafio == 'pokemons') {
+
+         let lista_palavras
+         if (this.tipo_desafio == 'animais') {
+            lista_palavras = dados.animais
+         }
+         else if (this.tipo_desafio == 'pokemons') {
+            lista_palavras = dados.pokemons
+         }
+
+         let index = Math.floor( Math.random() * lista_palavras.length )
+         let palavra = lista_palavras[index]
+
+         if (palavra.length <= jogo.tamanho_horizontal && palavra.length <= jogo.tamanho_vertical && palavra.length > 3 ) {
+            jogo.palavras_jogo.push(palavra.toUpperCase())
 
             if (jogo.palavras_jogo.length == this.quantidade_palavras) {
                jogo.finalizou_buscar_palavras = true
@@ -436,12 +468,12 @@ class Jogo
          }
          else {
             if (jogo.debug) {
-               console.log(`Palavra ${json.word} muito grande`)
+               console.log(`Palavra ${palavra} muito grande`)
             }
             jogo.buscarPalavra()
          }
-
-      })
+      }
+      
    }
 
    //Faz um foreach nas palavras, definindo uma posição valida para cada uma delas
